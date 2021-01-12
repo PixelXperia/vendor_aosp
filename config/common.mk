@@ -107,14 +107,6 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
     NexusLauncherRelease
 
-# Themed bootanimation
-TARGET_MISC_BLOCK_OFFSET ?= 0
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.misc.block.offset=$(TARGET_MISC_BLOCK_OFFSET)
-PRODUCT_PACKAGES += \
-    misc_writer \
-    themed_bootanimation
-
 # SystemUI plugins
 PRODUCT_PACKAGES += \
     QuickAccessWallet
@@ -193,9 +185,6 @@ $(call inherit-product, vendor/aosp/config/apex.mk)
 # Audio
 $(call inherit-product, vendor/aosp/config/audio.mk)
 
-# Bootanimation
-$(call inherit-product, vendor/aosp/config/bootanimation.mk)
-
 # Fonts
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
@@ -207,5 +196,9 @@ $(call inherit-product, vendor/aosp/config/ota.mk)
 
 # RRO Overlays
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
+
+# Booanimation
+PRODUCT_COPY_FILES += \
+    vendor/aosp/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
